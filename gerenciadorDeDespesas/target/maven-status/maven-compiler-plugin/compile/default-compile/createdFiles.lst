@@ -1,1 +1,5 @@
-com\mycompany\gerenciadordedespesas\GetMov.class
+br\com\gerenciadordedespesas\exceptions\MovimentacaoException.class
+br\com\gerenciadordedespesas\servlets\GetMov.class
+br\com\gerenciadordedespesas\classes\Movimentacao.class
+br\com\gerenciadordedespesas\connection\Connector.class
+br\com\gerenciadordedespesas\daos\DaoMovimentacao.class
