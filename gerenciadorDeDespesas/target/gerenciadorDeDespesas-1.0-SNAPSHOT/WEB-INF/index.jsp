@@ -1,3 +1,4 @@
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,31 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div id="titulo">
               <h1>Gerenciador Financeiro</h1>
+              <hr/>
             </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <div class="">
+            <select class="selects" name="mesmov">
+              <option value="0">Janeiro</option>
+              <option value="1">Fevereiro</option>
+              <option value="2">Março</option>
+              <option value="3">Abril</option>
+              <option value="4">Maio</option>
+              <option value="5">Junho</option>
+              <option value="6">Julho</option>
+              <option value="7">Agosto</option>
+              <option value="8">Setembro</option>
+              <option value="9">Outubro</option>
+              <option value="10">Novembro</option>
+              <option value="11">Dezembro</option>
+            </select>
+          </div>
+          <div class="">
+            <input type="text" maxlength="4" name="anomov" placeholder="Ano" value="">
+          </div>
         </div>
       </div>
       <div class="row">
@@ -26,7 +51,24 @@
           <div id="sessaotabela">
             <tbody>
               <table>
-
+                <tr>
+                  <th>Nome</th>
+                  <th>Tipo</th>
+                  <th>Valor</th>
+                  <th>Data</th>
+                  <th>Parcelas</th>
+                  <th>Status</th>
+                </tr>
+                <c:forEach var="mov" items="${movimentacao}">
+                  <tr>
+                    <td>${mov.nomeMovimentacao}</td>
+                    <td>${mov.tipoMovimentacao}</td>
+                    <td>${mov.valorMovimentacao}</td>
+                    <td>${mov.dataMovimentacao}</td>
+                    <td>${mov.numeroDeParcelas}</td>
+                    <td>${mov.statusDespesa}</td>
+                  </tr>
+                </c:forEach>
               </table>
             </tbody>
           </div>

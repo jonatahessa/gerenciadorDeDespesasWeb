@@ -27,10 +27,10 @@ public class DaoMovimentacao {
             throws SQLException, Exception {
         //Monta a string de inserção de um produtoo no BD,
         //utilizando os dados do produto passados como parâmetro
-        String sql = "INSERT INTO movimentacao (TipoMovimentacao, NomeMovimentacao, "
-                + "ProprietarioMovimentacao, ValorMovimentacao, DataMovimentacao, "
+        String sql = "INSERT INTO movimentacao (TipoMovimentacao, "
+                + "NomeMovimentacao, ValorMovimentacao, DataMovimentacao, "
                 + "NumeroDeParcelas, StatusDespesa, MovimentacaoFixa, MovimentacaoEnabled) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -45,13 +45,12 @@ public class DaoMovimentacao {
 
             statement.setString(1, movimentacao.getTipoMovimentacao());
             statement.setString(2, movimentacao.getNomeMovimentacao());
-            statement.setString(3, movimentacao.getProprietarioDaMovimentacao());
-            statement.setString(4, movimentacao.getValorMovimentacao());
-            statement.setString(5, movimentacao.getDataMovimentacao());
-            statement.setString(6, movimentacao.getNumeroDeParcelas());
-            statement.setString(7, movimentacao.getStatusDespesa());
-            statement.setString(8, movimentacao.getMovimentacaoFixa());
-            statement.setString(9, movimentacao.getMovimentacaoEnabled());
+            statement.setString(3, movimentacao.getValorMovimentacao());
+            statement.setDate(4, movimentacao.getDataMovimentacao());
+            statement.setString(5, movimentacao.getNumeroDeParcelas());
+            statement.setString(6, movimentacao.getStatusDespesa());
+            statement.setString(7, movimentacao.getMovimentacaoFixa());
+            statement.setString(8, movimentacao.getMovimentacaoEnabled());
             System.out.println(statement.toString());
 
             //Exibe no console o que será executado no banco de dados
@@ -120,7 +119,6 @@ public class DaoMovimentacao {
         String sql = "UPDATE movimentacao "
                 + "SET TipoMovimentacao = ?, "
                 + "NomeMovimentacao = ?, "
-                + "ProprietarioMovimentacao = ?, "
                 + "ValorMovimentacao = ?, "
                 + "DataMovimentacao = ?, "
                 + "NumeroDeParcelas = ?, "
@@ -142,14 +140,13 @@ public class DaoMovimentacao {
 
             statement.setString(1, movimentacao.getTipoMovimentacao());
             statement.setString(2, movimentacao.getNomeMovimentacao());
-            statement.setString(3, movimentacao.getProprietarioDaMovimentacao());
-            statement.setString(4, movimentacao.getValorMovimentacao());
-            statement.setString(5, movimentacao.getDataMovimentacao());
-            statement.setString(6, movimentacao.getNumeroDeParcelas());
-            statement.setString(7, movimentacao.getStatusDespesa());
-            statement.setString(8, movimentacao.getMovimentacaoFixa());
-            statement.setString(9, movimentacao.getMovimentacaoEnabled());
-            statement.setString(10, "" + id);
+            statement.setString(3, movimentacao.getValorMovimentacao());
+            statement.setDate(4, movimentacao.getDataMovimentacao());
+            statement.setString(5, movimentacao.getNumeroDeParcelas());
+            statement.setString(6, movimentacao.getStatusDespesa());
+            statement.setString(7, movimentacao.getMovimentacaoFixa());
+            statement.setString(8, movimentacao.getMovimentacaoEnabled());
+            statement.setString(9, "" + id);
             System.out.println(statement.toString());
 
             //Exibe no console o que será executado no banco de dados
@@ -177,7 +174,7 @@ public class DaoMovimentacao {
         //Monta a string de pesquisa de um cliente no BD,
         //utilizando os dados do produto passados como parâmetro
         String sql = "SELECT * FROM Movimentacao "
-                + " WHERE Movimentacao.MovimentacaoEnabled = 'true';";
+                + " WHERE Movimentacao.MovimentacaoEnabled = 'TRUE';";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -208,13 +205,12 @@ public class DaoMovimentacao {
                 statement.setInt(1, movimentacao.getIdMovimentacao());
                 statement.setString(2, movimentacao.getTipoMovimentacao());
                 statement.setString(3, movimentacao.getNomeMovimentacao());
-                statement.setString(4, movimentacao.getProprietarioDaMovimentacao());
-                statement.setString(5, movimentacao.getValorMovimentacao());
-                statement.setString(6, movimentacao.getDataMovimentacao());
-                statement.setString(7, movimentacao.getNumeroDeParcelas());
-                statement.setString(8, movimentacao.getStatusDespesa());
-                statement.setString(9, movimentacao.getMovimentacaoFixa());
-                statement.setString(10, movimentacao.getMovimentacaoEnabled());
+                statement.setString(4, movimentacao.getValorMovimentacao());
+                statement.setDate(5, movimentacao.getDataMovimentacao());
+                statement.setString(6, movimentacao.getNumeroDeParcelas());
+                statement.setString(7, movimentacao.getStatusDespesa());
+                statement.setString(8, movimentacao.getMovimentacaoFixa());
+                statement.setString(9, movimentacao.getMovimentacaoEnabled());
                 System.out.println(statement.toString());
 
                 //Adiciona a instância na lista
@@ -271,71 +267,49 @@ public class DaoMovimentacao {
     //para composição de uma lista de produtos para retorno.
     public static List<Movimentacao> executarConsulta(String sql) throws
             MovimentacaoException, SQLException, Exception {
-        //Lista de produtos de resultado
         List<Movimentacao> listaMovimentacao = null;
-        //Conexão para abertura e fechamento
         Connection connection = null;
-        //Statement para obtenção através da conexão, execução de
-        //comandos SQL e fechamentos
         Statement statement = null;
-        //Armazenará os resultados do banco de dados
         ResultSet result = null;
         try {
-            //Abre uma conexão com o banco de dados
             connection = Connector.getConnection();
-            //Cria um statement para execução de instruções SQL
             statement = connection.createStatement();
-            //Exibe no console o que será executado no banco de dados
             System.out.println("Executando CONSULTA SQL: " + sql);
-            //Executa a consulta SQL no banco de dados
             result = statement.executeQuery(sql);
-            //Itera por cada item do resultado
             while (result.next()) {
-                //Se a lista não foi inicializada, a inicializa
                 if (listaMovimentacao == null) {
                     listaMovimentacao = new ArrayList<Movimentacao>();
                 }
-                //Cria uma instância de produto e popula com os valores do BD
                 Movimentacao movimentacao = new Movimentacao();
                 movimentacao.setIdMovimentacao(result.getInt("MovimentacaoId"));
                 movimentacao.setTipoMovimentacao(result.getString("TipoMovimentacao"));
                 movimentacao.setNomeMovimentacao(result.getString("NomeMovimentacao"));
-                movimentacao.setProprietarioDaMovimentacao(result.getString("ProprietarioMovimentacao"));
                 movimentacao.setValorMovimentacao(result.getString("ValorMovimentacao"));
-                movimentacao.setDataMovimentacao(result.getString("DataMovimentacao"));
+                movimentacao.setDataMovimentacao(result.getDate("DataMovimentacao"));
                 movimentacao.setNumeroDeParcelas(result.getString("NumeroDeParcelas"));
                 movimentacao.setMovimentacaoFixa(result.getString("MovimentacaoFixa"));
                 movimentacao.setStatusDespesa(result.getString("StatusDespesa"));
                 movimentacao.setMovimentacaoEnabled(result.getString("MovimentacaoEnabled"));
-                //Adiciona a instância na lista
                 listaMovimentacao.add(movimentacao);
             }
         } finally {
-            //Se o result ainda estiver aberto, realiza seu fechamento
             if (result != null && !result.isClosed()) {
                 result.close();
             }
-            //Se o statement ainda estiver aberto, realiza seu fechamento
             if (statement != null && !statement.isClosed()) {
                 statement.close();
             }
-            //Se a conexão ainda estiver aberta, realiza seu fechamento
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
         }
-        //Retorna a lista de clientes do banco de dados
         return listaMovimentacao;
     }
 
-    //Lista todos os produtos da tabela quartos
     public static List<Movimentacao> listar()
             throws SQLException, Exception {
-        //Monta a string de listagem de produtos no banco, considerando
-        //apenas a coluna de ativação de produtos ("enabled")
-        String sql = "SELECT * FROM movimentacao WHERE MovimentacaoEnabled = 'true'";
+        String sql = "SELECT * FROM movimentacao WHERE MovimentacaoEnabled = 'TRUE'";
 
-        //Retorna o resultado da execução da consulta SQL montada
         return executarConsulta(sql);
     }
 
@@ -366,9 +340,8 @@ public class DaoMovimentacao {
             movimentacao.setIdMovimentacao(result.getInt("MovimentacaoId"));
             movimentacao.setTipoMovimentacao(result.getString("TipoMovimentacao"));
             movimentacao.setNomeMovimentacao(result.getString("NomeMovimentacao"));
-            movimentacao.setProprietarioDaMovimentacao(result.getString("ProprietarioMovimentacao"));
             movimentacao.setValorMovimentacao(result.getString("ValorMovimentacao"));
-            movimentacao.setDataMovimentacao(result.getString("DataMovimentacao"));
+            movimentacao.setDataMovimentacao(result.getDate("DataMovimentacao"));
             movimentacao.setNumeroDeParcelas(result.getString("NumeroDeParcelas"));
             movimentacao.setMovimentacaoFixa(result.getString("MovimentacaoFixa"));
             movimentacao.setStatusDespesa(result.getString("StatusDespesa"));

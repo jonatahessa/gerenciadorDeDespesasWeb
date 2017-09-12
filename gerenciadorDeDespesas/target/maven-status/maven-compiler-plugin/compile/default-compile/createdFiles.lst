@@ -3,3 +3,4 @@ br\com\gerenciadordedespesas\servlets\GetMov.class
 br\com\gerenciadordedespesas\classes\Movimentacao.class
 br\com\gerenciadordedespesas\connection\Connector.class
 br\com\gerenciadordedespesas\daos\DaoMovimentacao.class
+br\com\gerenciadordedespesas\toolsbox\Utils.class

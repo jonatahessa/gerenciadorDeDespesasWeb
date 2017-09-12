@@ -27,11 +27,11 @@ public class Connector {
             Class.forName(driverName);
 
             //Configurando a conexao com o banco de dados
-            String serveName = "ger-desp.mysql.uhserver.com"; // Caminho do servidor do BD
-            String mydatabase = "ger_desp"; // Nome do banco de dados
+            String serveName = "gerwebteste.mysql.uhserver.com"; // Caminho do servidor do BD
+            String mydatabase = "gerwebteste"; // Nome do banco de dados
             String url = "jdbc:mysql://" + serveName + "/" + mydatabase;
-            String username = "joliveira"; // Nome de usuario
-            String password = "br@sil3030"; // Senha de acesso
+            String username = "jonata001"; // Nome de usuario
+            String password = "br@sil3003"; // Senha de acesso
             connection = DriverManager.getConnection(url, username, password);
 
             //Teste de conexao

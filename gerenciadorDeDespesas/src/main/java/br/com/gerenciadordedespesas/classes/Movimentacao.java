@@ -5,6 +5,8 @@
  */
 package br.com.gerenciadordedespesas.classes;
 
+import java.sql.Date;
+
 /**
  *
  * @author joliveira
@@ -14,9 +16,8 @@ public class Movimentacao {
     private int idMovimentacao;
     private String tipoMovimentacao;
     private String nomeMovimentacao;
-    private String proprietarioDaMovimentacao;
     private String valorMovimentacao;
-    private String dataMovimentacao;
+    private Date dataMovimentacao;
     private String numeroDeParcelas;
     private String statusDespesa;
     private String movimentacaoFixa;
@@ -38,14 +39,6 @@ public class Movimentacao {
         this.nomeMovimentacao = nomeMovimentacao;
     }
 
-    public String getProprietarioDaMovimentacao() {
-        return proprietarioDaMovimentacao;
-    }
-
-    public void setProprietarioDaMovimentacao(String proprietarioDaMovimentacao) {
-        this.proprietarioDaMovimentacao = proprietarioDaMovimentacao;
-    }
-
     public String getValorMovimentacao() {
         return valorMovimentacao;
     }
@@ -54,11 +47,11 @@ public class Movimentacao {
         this.valorMovimentacao = valorMovimentacao;
     }
 
-    public String getDataMovimentacao() {
+    public Date getDataMovimentacao() {
         return dataMovimentacao;
     }
 
-    public void setDataMovimentacao(String dataMovimentacao) {
+    public void setDataMovimentacao(Date dataMovimentacao) {
         this.dataMovimentacao = dataMovimentacao;
     }
 
