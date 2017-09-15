@@ -7,7 +7,9 @@ package br.com.gerenciadordedespesas.servlets;
 
 import br.com.gerenciadordedespesas.classes.Movimentacao;
 import java.io.IOException;
-import java.util.*;
+import java.sql.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
@@ -26,9 +28,7 @@ public class GetMov extends HttpServlet {
             throws ServletException, IOException, Exception {
         response.setContentType("text/html;charset=UTF-8");
         GregorianCalendar dataAtual = new GregorianCalendar();
-        int ano = dataAtual.get(Calendar.YEAR);
-        System.out.println("AQUI: " + ano);
-        List<Movimentacao> movimentacao = br.com.gerenciadordedespesas.toolsbox.Utils.ListarMovimentacao();
+        List<Movimentacao> movimentacao = br.com.gerenciadordedespesas.toolsbox.Utils.ListarMovimentacao(dataAtual);
         request.setAttribute("movimentacao", movimentacao);
         RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/index.jsp");
         dispatcher.forward(request, response);

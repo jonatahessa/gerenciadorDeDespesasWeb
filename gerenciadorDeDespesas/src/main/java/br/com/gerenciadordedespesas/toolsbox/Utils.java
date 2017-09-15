@@ -14,8 +14,8 @@ import java.util.*;
  */
 public class Utils {
     
-    public static List<Movimentacao> ListarMovimentacao() throws Exception {
-        List<Movimentacao> mov = br.com.gerenciadordedespesas.daos.DaoMovimentacao.listar();
+    public static List<Movimentacao> ListarMovimentacao(GregorianCalendar dataAtual) throws Exception {
+        List<Movimentacao> mov = br.com.gerenciadordedespesas.daos.DaoMovimentacao.listar(dataAtual);
         
         return mov;
     }

@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class DaoMovimentacao {
@@ -306,9 +307,14 @@ public class DaoMovimentacao {
         return listaMovimentacao;
     }
 
-    public static List<Movimentacao> listar()
+    public static List<Movimentacao> listar(GregorianCalendar data)
             throws SQLException, Exception {
-        String sql = "SELECT * FROM movimentacao WHERE MovimentacaoEnabled = 'TRUE'";
+        String sql = "SELECT * FROM movimentacao WHERE "
+                + "MONTH(DataMovimentacao) = '?' AND MovimentacaoEnabled = 'TRUE';";
+        
+        java.sql.Date dataAtual = new java.sql.Date(data.getTimeInMillis());
+        PreparedStatement statement = null;
+        statement.setDate(1, dataAtual);
 
         return executarConsulta(sql);
     }
