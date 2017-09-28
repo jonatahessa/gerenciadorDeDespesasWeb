@@ -307,14 +307,12 @@ public class DaoMovimentacao {
         return listaMovimentacao;
     }
 
-    public static List<Movimentacao> listar(GregorianCalendar data)
+    public static List<Movimentacao> listar()
             throws SQLException, Exception {
-        String sql = "SELECT * FROM movimentacao WHERE "
-                + "MONTH(DataMovimentacao) = '?' AND MovimentacaoEnabled = 'TRUE';";
+        String sql = "SELECT * FROM movimentacao WHERE MovimentacaoEnabled = 'TRUE'"
+                + " AND MONTH(DataMovimentacao) =  MONTH(now());";
         
-        java.sql.Date dataAtual = new java.sql.Date(data.getTimeInMillis());
         PreparedStatement statement = null;
-        statement.setDate(1, dataAtual);
 
         return executarConsulta(sql);
     }

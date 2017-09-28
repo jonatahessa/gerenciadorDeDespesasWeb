@@ -14,9 +14,14 @@ import java.util.*;
  */
 public class Utils {
     
-    public static List<Movimentacao> ListarMovimentacao(GregorianCalendar dataAtual) throws Exception {
-        List<Movimentacao> mov = br.com.gerenciadordedespesas.daos.DaoMovimentacao.listar(dataAtual);
+    public static List<Movimentacao> ListarMovimentacao() throws Exception {
+        List<Movimentacao> mov = br.com.gerenciadordedespesas.daos.DaoMovimentacao.listar();
         
         return mov;
+    }
+    
+    public static String nomeDoMes(Date data) {
+        String retorno = null;
+        return retorno;
     }
 }
